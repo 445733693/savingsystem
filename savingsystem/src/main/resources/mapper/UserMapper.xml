@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fis.savingsystem.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.fis.savingsystem.pojo.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userId" jdbcType="VARCHAR" property="userId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from `user`
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyProperty="id" parameterType="com.fis.savingsystem.pojo.User" useGeneratedKeys="true">
+    insert into `user` (userId, name, age, 
+      password, address)
+    values (#{userId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
+      #{password,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.fis.savingsystem.pojo.User">
+    update `user`
+    set userId = #{userId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      password = #{password,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, userId, name, age, password, address
+    from `user`
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, userId, name, age, password, address
+    from `user`
+  </select>
+</mapper>

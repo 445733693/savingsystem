@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fis.savingsystem.mapper.RecordMapper">
+  <resultMap id="BaseResultMap" type="com.fis.savingsystem.pojo.Record">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userId" jdbcType="VARCHAR" property="userId" />
+    <result column="capitalBefore" jdbcType="DECIMAL" property="capitalBefore" />
+    <result column="capitalAfter" jdbcType="DECIMAL" property="capitalAfter" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="money" jdbcType="DECIMAL" property="money" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from `record`
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyProperty="id" parameterType="com.fis.savingsystem.pojo.Record" useGeneratedKeys="true">
+    insert into `record` (userId, capitalBefore, capitalAfter, 
+      date, status, money
+      )
+    values (#{userId,jdbcType=VARCHAR}, #{capitalBefore,jdbcType=DECIMAL}, #{capitalAfter,jdbcType=DECIMAL}, 
+      #{date,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{money,jdbcType=DECIMAL}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.fis.savingsystem.pojo.Record">
+    update `record`
+    set userId = #{userId,jdbcType=VARCHAR},
+      capitalBefore = #{capitalBefore,jdbcType=DECIMAL},
+      capitalAfter = #{capitalAfter,jdbcType=DECIMAL},
+      date = #{date,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      money = #{money,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, userId, capitalBefore, capitalAfter, date, status, money
+    from `record`
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, userId, capitalBefore, capitalAfter, date, status, money
+    from `record`
+  </select>
+
+</mapper>

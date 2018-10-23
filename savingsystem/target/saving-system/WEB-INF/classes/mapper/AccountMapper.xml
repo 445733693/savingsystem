@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fis.savingsystem.mapper.AccountMapper">
+  <resultMap id="BaseResultMap" type="com.fis.savingsystem.pojo.Account">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userId" jdbcType="VARCHAR" property="userId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="capital" jdbcType="DECIMAL" property="capital" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
+    <result column="lost" jdbcType="TINYINT" property="lost" />
+    <result column="lostDate" jdbcType="TIMESTAMP" property="lostDate" />
+    <result column="del" jdbcType="TINYINT" property="del" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from `account`
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyProperty="id" parameterType="com.fis.savingsystem.pojo.Account" useGeneratedKeys="true">
+    insert into `account` (userId, name, idcard, 
+      password, type, capital, 
+      date, lost, lostDate, 
+      del)
+    values (#{userId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{capital,jdbcType=DECIMAL}, 
+      #{date,jdbcType=TIMESTAMP}, #{lost,jdbcType=TINYINT}, #{lostDate,jdbcType=TIMESTAMP}, 
+      #{del,jdbcType=TINYINT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.fis.savingsystem.pojo.Account">
+    update `account`
+    set userId = #{userId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      capital = #{capital,jdbcType=DECIMAL},
+      date = #{date,jdbcType=TIMESTAMP},
+      lost = #{lost,jdbcType=TINYINT},
+      lostDate = #{lostDate,jdbcType=TIMESTAMP},
+      del = #{del,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, userId, name, idcard, password, type, capital, date, lost, lostDate, del
+    from `account`
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, userId, name, idcard, password, type, capital, date, lost, lostDate, del
+    from `account`
+  </select>
+
+</mapper>
